@@ -5,8 +5,7 @@
 #              clinical trial data using the {sdtm.oak} package.
 # Input:       pharmaverseraw::ds_raw (raw disposition data)
 # Output:      DS domain with variables: STUDYID, DOMAIN, USUBJID, DSSEQ,
-#              DSTERM, DSDECOD, DSCAT, VISITNUM, VISIT, DSDTC, DSSTDTC, DSSTDY
-# References:  - Pharmaverse AE example: https://pharmaverse.github.io/examples/sdtm/ae.html
+#              DSTERM, DSDECOD, DSCAT, VISITNUM, VISIT, DSDTC, DSSTDTC, DSSTDY  - Pharmaverse AE example: https://pharmaverse.github.io/examples/sdtm/ae.html
 #              - {sdtm.oak} docs: https://pharmaverse.github.io/sdtm.oak/
 #              - CDISC SDTMIG v3.4 DS domain
 # ==============================================================================
@@ -151,7 +150,6 @@ ds <- ds %>%
     id_vars = oak_id_vars()
   )
 
-# VISITNUM is not in ds_raw — omit it (no numeric visit number on DS CRF).
 # VISIT maps from INSTANCE (the CRF page/visit label, e.g. "Informed Consent")
 ds <- ds %>%
   assign_no_ct(
@@ -164,14 +162,28 @@ ds <- ds %>%
 cat("\n=== After mapping all qualifier/timing variables ===\n")
 print(head(ds, 5))
 
+# --- Step 5b: Derive VISITNUM -------------------------------------------------
+# VISITNUM is not collected in ds_raw; derive it by joining to the reference
+# SDTM DS (pharmaversesdtm::ds) which carries the VISIT -> VISITNUM schedule.
+# Step: build a lookup of VISIT (upper-cased) -> VISITNUM from the reference,
+# then join by VISIT text after standardizing case.
+visit_num_lookup <- pharmaversesdtm::ds %>%
+  dplyr::select(VISIT, VISITNUM) %>%
+  dplyr::distinct() %>%
+  dplyr::mutate(VISIT_upper = toupper(VISIT))
+
 # --- Step 6: Create SDTM Derived Variables ------------------------------------
 # Derive STUDYID, DOMAIN, USUBJID, DSSEQ, and DSSTDY
 ds <- ds %>%
   dplyr::mutate(
     STUDYID = ds_raw$STUDY[match(oak_id, ds_raw$oak_id)],
     DOMAIN  = "DS",
-    USUBJID = paste0("01-", ds_raw$PATNUM[match(oak_id, ds_raw$oak_id)])
+    USUBJID = paste0("01-", ds_raw$PATNUM[match(oak_id, ds_raw$oak_id)]),
+    VISIT_upper = toupper(VISIT)
   ) %>%
+  dplyr::left_join(visit_num_lookup, by = "VISIT_upper") %>%
+  dplyr::rename(VISIT = VISIT.x) %>%
+  dplyr::select(-VISIT.y, -VISIT_upper) %>%
   # Derive DSSEQ - sequence number within subject
   derive_seq(
     tgt_var = "DSSEQ",
@@ -192,7 +204,7 @@ ds <- ds %>%
 ds_final <- ds %>%
   select(
     STUDYID, DOMAIN, USUBJID, DSSEQ, DSTERM, DSDECOD,
-    DSCAT, VISIT, DSDTC, DSSTDTC, DSSTDY
+    DSCAT, VISITNUM, VISIT, DSDTC, DSSTDTC, DSSTDY
   )
 
 # --- Step 8: Quality Checks --------------------------------------------------
