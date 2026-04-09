@@ -119,9 +119,9 @@ ds <- ds %>%
   )
 
 # DSCAT is not collected on the CRF — all records from the DS aCRF are
-# "DISPOSITION EVENT". Derive it as a constant using hardcode_ct().
+# "DISPOSITION EVENT". Derive it as a constant using hardcode_no_ct().
 ds <- ds %>%
-  hardcode_ct(
+  hardcode_no_ct(
     raw_dat = ds_raw,
     raw_var = "IT.DSTERM",
     tgt_var = "DSCAT",
@@ -215,12 +215,11 @@ cat("\n=== DSCAT Distribution ===\n")
 print(table(ds_final$DSCAT, useNA = "ifany"))
 
 # --- Step 9: Save Output Dataset ----------------------------------------------
-# Save as RDS (native R format)
-saveRDS(ds_final, file = "ds_domain.rds")
-cat("\nDS domain saved to ds_domain.rds\n")
+# Paths are relative to the project root (roche-coding-assessment/)
+saveRDS(ds_final, file = "question_1_sdtm/ds_domain.rds")
+cat("\nDS domain saved to question_1_sdtm/ds_domain.rds\n")
 
-# Save as CSV for easy review
-write.csv(ds_final, file = "ds_domain.csv", row.names = FALSE)
-cat("DS domain saved to ds_domain.csv\n")
+write.csv(ds_final, file = "question_1_sdtm/ds_domain.csv", row.names = FALSE)
+cat("DS domain saved to question_1_sdtm/ds_domain.csv\n")
 
 cat("\n=== Script completed successfully ===\n")

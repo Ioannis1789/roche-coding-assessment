@@ -1,0 +1,236 @@
+=== ds_raw Structure ===
+tibble [850 × 13] (S3: tbl_df/tbl/data.frame)
+ $ STUDY     : chr [1:850] "CDISCPILOT01" "CDISCPILOT01" "CDISCPILOT01" "CDISCPILOT01" ...
+ $ PATNUM    : chr [1:850] "701-1015" "701-1015" "701-1015" "701-1023" ...
+ $ SITENM    : chr [1:850] "CDISCPILOT" "CDISCPILOT" "CDISCPILOT" "CDISCPILOT" ...
+ $ INSTANCE  : chr [1:850] "Baseline" "Week 26" "Week 26" "Baseline" ...
+ $ FORM      : chr [1:850] "DISC1" "DISC1" "DISC1" "DISC1" ...
+ $ FORML     : chr [1:850] "Subject Disposition" "Subject Disposition" "Subject Disposition" "Subject Disposition" ...
+ $ IT.DSTERM : chr [1:850] "Randomized" "Protocol Completed" NA "Randomized" ...
+ $ IT.DSDECOD: chr [1:850] "Randomized" "Completed" NA "Randomized" ...
+ $ OTHERSP   : chr [1:850] NA NA "Final Lab Visit" NA ...
+ $ DSDTCOL   : chr [1:850] "01-02-2014" "07-02-2014" "07-02-2014" "08-05-2012" ...
+ $ DSTMCOL   : chr [1:850] NA NA "11:45" NA ...
+ $ IT.DSSTDAT: chr [1:850] "01-02-2014" "07-02-2014" "07-02-2014" "08-05-2012" ...
+ $ DEATHDT   : chr [1:850] NA NA NA NA ...
+ - attr(*, "label")= chr "Disposition"
+
+=== ds_raw Column Names ===
+ [1] "STUDY"      "PATNUM"     "SITENM"     "INSTANCE"   "FORM"      
+ [6] "FORML"      "IT.DSTERM"  "IT.DSDECOD" "OTHERSP"    "DSDTCOL"   
+[11] "DSTMCOL"    "IT.DSSTDAT" "DEATHDT"   
+
+=== ds_raw First 10 Rows ===
+# A tibble: 10 × 13
+   STUDY PATNUM SITENM INSTANCE FORM  FORML IT.DSTERM IT.DSDECOD OTHERSP DSDTCOL
+   <chr> <chr>  <chr>  <chr>    <chr> <chr> <chr>     <chr>      <chr>   <chr>  
+ 1 CDIS… 701-1… CDISC… Baseline DISC1 Subj… Randomiz… Randomized <NA>    01-02-…
+ 2 CDIS… 701-1… CDISC… Week 26  DISC1 Subj… Protocol… Completed  <NA>    07-02-…
+ 3 CDIS… 701-1… CDISC… Week 26  DISC1 Subj… <NA>      <NA>       Final … 07-02-…
+ 4 CDIS… 701-1… CDISC… Baseline DISC1 Subj… Randomiz… Randomized <NA>    08-05-…
+ 5 CDIS… 701-1… CDISC… Week 4   DISC1 Subj… Adverse … Adverse E… <NA>    09-02-…
+ 6 CDIS… 701-1… CDISC… Week 4   DISC1 Subj… <NA>      <NA>       Final … 09-02-…
+ 7 CDIS… 701-1… CDISC… Retriev… DISC1 Subj… <NA>      <NA>       Final … 02-18-…
+ 8 CDIS… 701-1… CDISC… Baseline DISC1 Subj… Randomiz… Randomized <NA>    07-19-…
+ 9 CDIS… 701-1… CDISC… Week 26  DISC1 Subj… Protocol… Completed  <NA>    01-14-…
+10 CDIS… 701-1… CDISC… Week 26  DISC1 Subj… <NA>      <NA>       Final … 01-14-…
+# ℹ 3 more variables: DSTMCOL <chr>, IT.DSSTDAT <chr>, DEATHDT <chr>
+
+=== ds_raw after oak_id_vars ===
+# A tibble: 5 × 16
+  oak_id raw_source patient_number STUDY      PATNUM SITENM INSTANCE FORM  FORML
+   <int> <chr>      <chr>          <chr>      <chr>  <chr>  <chr>    <chr> <chr>
+1      1 ds_raw     701-1015       CDISCPILO… 701-1… CDISC… Baseline DISC1 Subj…
+2      2 ds_raw     701-1015       CDISCPILO… 701-1… CDISC… Week 26  DISC1 Subj…
+3      3 ds_raw     701-1015       CDISCPILO… 701-1… CDISC… Week 26  DISC1 Subj…
+4      4 ds_raw     701-1023       CDISCPILO… 701-1… CDISC… Baseline DISC1 Subj…
+5      5 ds_raw     701-1023       CDISCPILO… 701-1… CDISC… Week 4   DISC1 Subj…
+# ℹ 7 more variables: IT.DSTERM <chr>, IT.DSDECOD <chr>, OTHERSP <chr>,
+#   DSDTCOL <chr>, DSTMCOL <chr>, IT.DSSTDAT <chr>, DEATHDT <chr>
+
+=== Study Controlled Terminology ===
+   codelist_code term_code                  term_value
+1         C66727    C41331               ADVERSE EVENT
+2         C66727    C25250                   COMPLETED
+3         C66727    C28554                       DEATH
+4         C66727    C48226            LACK OF EFFICACY
+5         C66727    C48227           LOST TO FOLLOW-UP
+6         C66727    C48250          PHYSICIAN DECISION
+7         C66727   C142185          PROTOCOL VIOLATION
+8         C66727    C49628              SCREEN FAILURE
+9         C66727    C49632 STUDY TERMINATED BY SPONSOR
+10        C66727    C49634       WITHDRAWAL BY SUBJECT
+               collected_value                          term_preferred_term
+1                Adverse Event                                           AE
+2                    Completed                                    Completed
+3                        Death                                         Died
+4             Lack of Efficacy                                         <NA>
+5            Lost to Follow-Up                                         <NA>
+6           Physician Decision                                         <NA>
+7           Protocol Violation                                    Violation
+8               Screen Failure Failure to Meet Inclusion/Exclusion Criteria
+9  Study Terminated by Sponsor                                         <NA>
+10       Withdrawal by Subject                                      Dropout
+                term_synonyms
+1               ADVERSE EVENT
+2                    COMPLETE
+3                       Death
+4                        <NA>
+5                        <NA>
+6                        <NA>
+7                        <NA>
+8                        <NA>
+9                        <NA>
+10 Discontinued Participation
+
+=== Available raw variables for mapping ===
+ [1] "oak_id"         "raw_source"     "patient_number" "STUDY"         
+ [5] "PATNUM"         "SITENM"         "INSTANCE"       "FORM"          
+ [9] "FORML"          "IT.DSTERM"      "IT.DSDECOD"     "OTHERSP"       
+[13] "DSDTCOL"        "DSTMCOL"        "IT.DSSTDAT"     "DEATHDT"       
+
+=== After mapping DSTERM (topic variable) ===
+# A tibble: 5 × 4
+  oak_id raw_source patient_number DSTERM            
+   <int> <chr>      <chr>          <chr>             
+1      1 ds_raw     701-1015       Randomized        
+2      2 ds_raw     701-1015       Protocol Completed
+3      3 ds_raw     701-1015       <NA>              
+4      4 ds_raw     701-1023       Randomized        
+5      5 ds_raw     701-1023       Adverse Event     
+
+=== After mapping all qualifier/timing variables ===
+# A tibble: 5 × 9
+  oak_id raw_source patient_number DSTERM      DSDECOD DSCAT DSSTDTC DSDTC VISIT
+   <int> <chr>      <chr>          <chr>       <chr>   <chr> <iso86> <iso> <chr>
+1      1 ds_raw     701-1015       Randomized  RANDOM… DISP… 2014-0… 2014… Base…
+2      2 ds_raw     701-1015       Protocol C… PROTOC… DISP… 2014-0… 2014… Week…
+3      3 ds_raw     701-1015       <NA>        <NA>    <NA>  2014-0… 2014… Week…
+4      4 ds_raw     701-1023       Randomized  RANDOM… DISP… 2012-0… 2012… Base…
+5      5 ds_raw     701-1023       Adverse Ev… ADVERS… DISP… 2012-0… 2012… Week…
+
+=== Final DS Domain Dataset ===
+# A tibble: 850 × 11
+   STUDYID      DOMAIN USUBJID DSSEQ DSTERM DSDECOD DSCAT VISIT DSDTC DSSTDTC   
+   <chr>        <chr>  <chr>   <int> <chr>  <chr>   <chr> <chr> <iso> <date>    
+ 1 CDISCPILOT01 DS     01-701…     1 Proto… PROTOC… DISP… Week… 2014… 2014-07-02
+ 2 CDISCPILOT01 DS     01-701…     2 Rando… RANDOM… DISP… Base… 2014… 2014-01-02
+ 3 CDISCPILOT01 DS     01-701…     3 <NA>   <NA>    <NA>  Week… 2014… 2014-07-02
+ 4 CDISCPILOT01 DS     01-701…     1 Adver… ADVERS… DISP… Week… 2012… 2012-09-02
+ 5 CDISCPILOT01 DS     01-701…     2 Rando… RANDOM… DISP… Base… 2012… 2012-08-05
+ 6 CDISCPILOT01 DS     01-701…     3 <NA>   <NA>    <NA>  Week… 2012… 2012-09-02
+ 7 CDISCPILOT01 DS     01-701…     4 <NA>   <NA>    <NA>  Retr… 2013… 2013-02-18
+ 8 CDISCPILOT01 DS     01-701…     1 Proto… PROTOC… DISP… Week… 2014… 2014-01-14
+ 9 CDISCPILOT01 DS     01-701…     2 Rando… RANDOM… DISP… Base… 2013… 2013-07-19
+10 CDISCPILOT01 DS     01-701…     3 <NA>   <NA>    <NA>  Week… 2014… 2014-01-14
+# ℹ 840 more rows
+# ℹ 1 more variable: DSSTDY <int>
+
+=== Dataset Dimensions ===
+Rows: 850 | Columns: 11 
+
+=== Variable Summary ===
+tibble [850 × 11] (S3: tbl_df/tbl/data.frame)
+ $ STUDYID: chr [1:850] "CDISCPILOT01" "CDISCPILOT01" "CDISCPILOT01" "CDISCPILOT01" ...
+ $ DOMAIN : chr [1:850] "DS" "DS" "DS" "DS" ...
+ $ USUBJID: chr [1:850] "01-701-1015" "01-701-1015" "01-701-1015" "01-701-1023" ...
+ $ DSSEQ  : int [1:850] 1 2 3 1 2 3 4 1 2 3 ...
+ $ DSTERM : chr [1:850] "Protocol Completed" "Randomized" NA "Adverse Event" ...
+ $ DSDECOD: chr [1:850] "PROTOCOL COMPLETED" "RANDOMIZED" NA "ADVERSE EVENT" ...
+ $ DSCAT  : chr [1:850] "DISPOSITION EVENT" "DISPOSITION EVENT" NA "DISPOSITION EVENT" ...
+ $ VISIT  : chr [1:850] "Week 26" "Baseline" "Week 26" "Week 4" ...
+ $ DSDTC  : 'iso8601' chr [1:850] "2014-07-02" "2014-01-02" "2014-07-02T11:45" "2012-09-02" ...
+ $ DSSTDTC: Date[1:850], format: "2014-07-02" "2014-01-02" ...
+ $ DSSTDY : int [1:850] 182 1 182 29 1 29 198 180 1 180 ...
+
+=== Check for missing USUBJID ===
+Missing USUBJID count: 0 
+
+=== DSDECOD Distribution ===
+
+                                                  ADVERSE EVENT 
+                                                             92 
+                                           CAREGIVER BECAME ILL 
+                                                              1 
+                                               CAREGIVER BURDEN 
+                                                              1 
+                          CAREGIVER DECISION:  SEE COMMENT PAGE 
+                                                              1 
+                        CAREGIVER WAS HOSPITALIZED;SEE COMMENTS 
+                                                              1 
+                                  CAREGIVER WITHDREW FROM STUDY 
+                                                              1 
+                                                          DEATH 
+                                                              3 
+                            DR PUT PT ON AN EXCLUDED MEDICATION 
+                                                              1 
+                                   FAMILY WISHES TO DISCONTINUE 
+                                                              1 
+                                             HYPERBILIRUBINEMIA 
+                                                              1 
+                                              INSTITUTIONALIZED 
+                                                              1 
+                 LACK OF EFFICACY, PATIENT CAREGIVER PERCEPTION 
+                                                              4 
+                                      LEAVING AREA FOR 5 MONTHS 
+                                                              1 
+                                               PATCH DISCOMFORT 
+                                                              1 
+                                              PATIENT IS MOVING 
+                                                              1 
+                                    PATIENT REFUSES TO CONTINUE 
+                                                              1 
+                             PATIENT TO BEGIN COURSE OF ARICEPT 
+                                                              1 
+     PATIENT UNABLE TO TOLERATE DERMAL IRRITATION AT PATCH SITE 
+                                                              1 
+                                       PATIENT WITHDREW CONSENT 
+                                                              3 
+                                         PLACED IN NURSING HOME 
+                                                              1 
+                                       PMD DECISION DUE TO AE'S 
+                                                              1 
+                                             PROTOCOL COMPLETED 
+                                                            110 
+                                PROTOCOL ENTRY CRITERIA NOT MET 
+                                                              3 
+                                             PROTOCOL VIOLATION 
+                                                              3 
+       PT FINDS PATCHES"INCONVENIENT & ITCHY;PT PREFERS'PILLS'" 
+                                                              1 
+                                       PT KEPT REMOVING PATCHES 
+                                                              1 
+                                                     RANDOMIZED 
+                                                            254 
+                                                 SCREEN FAILURE 
+                                                             52 
+SPONSOR DECISION (STUDY OR PATIENT DISCONTINUED BY THE SPONSOR) 
+                                                              7 
+                                                TOO MANY VISITS 
+                                                              1 
+                                 TOO MUCH TROUBLE FOR CAREGIVER 
+                                                              1 
+                   TOO TIME CONSUMING;PT REFUSED FUTURE HOLTERS 
+                                                              1 
+                  UNABLE TO CONTACT PATIENT (LOST TO FOLLOW-UP) 
+                                                              2 
+                                               WITHDRAW CONSENT 
+                                                              1 
+                       WITHDRAW CONSENT DUE TO COMPLIANCY ISSUE 
+                                                              1 
+                                              WITHDRAWS CONSENT 
+                                                              1 
+                                               WITHDREW CONSENT 
+                                                              2 
+                                                           <NA> 
+                                                            290 
+
+=== DSCAT Distribution ===
+
+DISPOSITION EVENT              <NA> 
+              560               290 
+
+DS domain saved to ds_domain.rds
+DS domain saved to ds_domain.csv
+
+=== Script completed successfully ===
