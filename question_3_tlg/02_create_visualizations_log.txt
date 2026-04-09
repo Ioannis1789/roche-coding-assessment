@@ -1,0 +1,44 @@
+=== Population for Analysis ===
+Total subjects (denominator): 254 
+TEAE records: 1122 
+
+=== Building Plot 1: AE Severity Distribution ===
+AESEV levels:
+
+    MILD MODERATE   SEVERE 
+     728      353       41 
+Plot 1 saved to plot1_ae_severity.png
+
+=== Building Plot 2: Top 10 AEs with 95% CI ===
+Top 10 AEs by subject count:
+# A tibble: 10 × 2
+   AETERM                       ae_n
+   <chr>                       <int>
+ 1 PRURITUS                       54
+ 2 APPLICATION SITE PRURITUS      50
+ 3 ERYTHEMA                       36
+ 4 APPLICATION SITE ERYTHEMA      30
+ 5 RASH                           26
+ 6 APPLICATION SITE DERMATITIS    21
+ 7 APPLICATION SITE IRRITATION    21
+ 8 DIZZINESS                      21
+ 9 DIARRHOEA                      17
+10 SINUS BRADYCARDIA              17
+
+Top 10 AEs with 95% Clopper-Pearson CIs:
+# A tibble: 10 × 5
+   AETERM                       ae_n   pct lower upper
+   <fct>                       <int> <dbl> <dbl> <dbl>
+ 1 PRURITUS                       54  21.3  16.4  26.8
+ 2 APPLICATION SITE PRURITUS      50  19.7  15    25.1
+ 3 ERYTHEMA                       36  14.2  10.1  19.1
+ 4 APPLICATION SITE ERYTHEMA      30  11.8   8.1  16.4
+ 5 RASH                           26  10.2   6.8  14.6
+ 6 APPLICATION SITE DERMATITIS    21   8.3   5.2  12.4
+ 7 APPLICATION SITE IRRITATION    21   8.3   5.2  12.4
+ 8 DIZZINESS                      21   8.3   5.2  12.4
+ 9 DIARRHOEA                      17   6.7   3.9  10.5
+10 SINUS BRADYCARDIA              17   6.7   3.9  10.5
+Plot 2 saved to plot2_top10_ae.png
+
+=== Script 02 completed successfully ===
